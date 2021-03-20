@@ -24,7 +24,7 @@ import com.aston.filrouge.model.Employee;
 import com.aston.filrouge.repository.EmployeeRepository;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://164.132.212.109:4200")
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {

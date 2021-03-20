@@ -4,6 +4,7 @@ Projet fil rouge Aston
 install maven
 install jdk8
 cd ProjetFilRouge  # ce mettre dans le fichier Back ProjetFilRouge
+mvn install # Build le projet
 cd target #ce mettre dans le fichier target
 java -jar nomdujar.jar  pour essaie dev
 #####Front En Angular ##########

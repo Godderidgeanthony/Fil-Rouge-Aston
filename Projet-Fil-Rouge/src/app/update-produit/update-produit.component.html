@@ -1,5 +1,5 @@
 <h3>Mise A Jour Produit</h3>
-<div [hidden]="submitted" style="width: 400px;">
+<div style="width: 400px;">
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Nom du Produit</label>
@@ -22,7 +22,7 @@
     </div>
    
     <td><button type="submit" class="btn btn-success">Submit</button></td>
-    <td><button (click)="listP()" class="btn btn-primary" >Retour</button></td>
+    <td><button (click)="produit" class="btn btn-primary" >Retour</button></td>
     
   </form>
 </div>

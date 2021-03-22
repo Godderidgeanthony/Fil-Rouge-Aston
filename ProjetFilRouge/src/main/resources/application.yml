@@ -4,8 +4,7 @@ spring:
    
  jpa:    
   hibernate:
-   ddl-auto: create
-# spring data jpa
+   ddl-auto: validate# spring data jpa
  # jpa:
     #hibernate:
      # ddl-auto: create ou update

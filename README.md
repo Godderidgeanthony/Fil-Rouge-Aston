@@ -1,4 +1,4 @@
-nstallations sur la VM ************************
+Installations sur la VM ************************
 
 #### On identifie les MAJ ànstaller ####
 

@@ -213,6 +213,22 @@ sudo docker build -t image-back .
 
 sudo docker run --name container-back -d -p 4200:4200 -t image-back
 
+#### Push de l'image àartir du Docker Hub et montage (back) ####
+
+Dans le path adéat (Front ou Back) :
+sudo docker build -t hydcloud/fil-rouge:image-back .
+sudo docker push hydcloud/fil-rouge:image-back
+sudo docker pull hydcloud/fil-rouge:image-back
+sudo docker run --name container-back -d -p 8080:8080 -t "id de l'image"
+
+#### Push de l'image àartir du Docker Hub et montage (front) ####
+
+Dans le path adéat (Front ou Back) :
+sudo docker build -t hydcloud/fil-rouge:image-front .
+sudo docker push hydcloud/fil-rouge:image-front
+sudo docker pull hydcloud/fil-rouge:image-front
+sudo docker run --name container-front -d -p 4200:4200 -t "id de l'image"
+
 #### Nettoyer les build Docker #### 
 
 sudo docker system prune --all --force --volumes

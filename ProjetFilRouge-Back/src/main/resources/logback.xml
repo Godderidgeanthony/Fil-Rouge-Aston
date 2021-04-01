@@ -2,7 +2,7 @@
 <configuration>
     <property scope="context" name="log.fileExtension" value="log"/>
     <property scope="context" name="log.directory" value="/logs"/>
-    <property scope="context" name="log.fileName" value="bootiful-elk"/>
+    <property scope="context" name="log.fileName" value="FilRougeLog"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [${HOSTNAME}] [%thread] %level %logger{36}@%method:%line - %msg%n</pattern>
@@ -17,7 +17,7 @@
         </encoder>
     </appender>
     <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>192.168.0.37:5000</destination>
+        <destination>164.132.212.109:5000</destination>
         <!-- encoder is required -->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
         <keepAliveDuration>5 minutes</keepAliveDuration>

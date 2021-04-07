@@ -2,4 +2,5 @@ h2 {
     font-size: 60px;
     font-weight: 800;
     @include sans-serif-font;
+    color: white;
 }

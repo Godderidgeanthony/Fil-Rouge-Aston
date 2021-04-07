@@ -9,7 +9,6 @@ body {
 }
 
 .navbar {
-    font-size: 20px;
     font-weight: 800;
     list-style-type: none;
     text-align: center;
@@ -18,21 +17,26 @@ body {
     padding: 13px;
 }
 
+.nav-link {
+    font-size: 20px;
+    color: white;
+}
+
 h3 {
     font-size: 20px;
     font-weight: 800;
     @include sans-serif-font;
 }
 
-.background .footer {
-    padding: 50px 0 65px;
-    .list-inline {
-        margin: 0;
-        padding: 0;
-    }
-    .copyright {
-        font-size: 14px;
-        margin-bottom: 0;
-        text-align: center;
-    }
+.bg {
+    background-image: url('/assets/img/home-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 0;
 }

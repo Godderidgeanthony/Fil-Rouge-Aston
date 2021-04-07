@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="db814318-ae44-4013-b74f-ff8e72ec3519" name="hydcloud_docker">
+        <fileTransfer accessType="SFTP" host="192.168.0.46" port="22" sshConfigId="a7e7cddb-8613-4082-bf11-4c669aa4d47c" sshConfig="VM Locale Projet Fil Rouge">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="e24ceb29-3313-4a32-af69-6aa49fe67bfe" name="hydcloud_docker_back">
+        <fileTransfer accessType="SFTP" host="192.168.0.46" port="22" sshConfigId="a7e7cddb-8613-4082-bf11-4c669aa4d47c" sshConfig="VM Locale Projet Fil Rouge">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -4,3 +4,14 @@ h2 {
     @include sans-serif-font;
     color: white;
 }
+
+.footer {
+    flex-shrink: 0;
+    flex-grow: 0;
+    background: #eee;
+    padding: 3px 15px;
+}
+
+p {
+    font-family: Lato;
+}

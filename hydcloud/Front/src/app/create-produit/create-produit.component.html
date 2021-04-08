@@ -2,7 +2,7 @@
 <div [hidden]="submitted" style="width: 400px;">
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="name">Nom du Produit</label>
+            <label for="name">Nom du produit</label>
             <input type="text" class="form-control" id="nameproduit" required [(ngModel)]="produit.nameproduit" name="nameproduit">
         </div>
 
@@ -12,7 +12,7 @@
         </div>
 
         <div class="form-group">
-            <label for="name">Quantite</label>
+            <label for="name">Quantité</label>
             <input type="number" class="form-control" id="quantite" required [(ngModel)]="produit.quantite" name="quantite">
         </div>
 

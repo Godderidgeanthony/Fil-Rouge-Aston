@@ -5,11 +5,10 @@ h2 {
     color: white;
 }
 
-.footer {
-    flex-shrink: 0;
-    flex-grow: 0;
-    background: #eee;
-    padding: 3px 15px;
+h3 {
+    font-size: 20px;
+    @include sans-serif-font;
+    color: white;
 }
 
 p {

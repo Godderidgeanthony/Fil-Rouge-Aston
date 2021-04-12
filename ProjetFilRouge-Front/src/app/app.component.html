@@ -1,32 +1,30 @@
 <div class="container">
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style=" display:inline-block;">
-  <!-- Links -->
-  <ul class="navbar navbar-dark bg-dark">
-    <li class="nav-item">
-        <a routerLink="employees" class="nav-link" routerLinkActive="active">Liste d Employees</a>
-    </li>
-    <li class="nav-item">
-        <a routerLink="add" class="nav-link" routerLinkActive="active">Ajouter Employee</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="produits" class="nav-link" routerLinkActive="active">Liste de Produits</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="addP" class="nav-link" routerLinkActive="active">Ajouter Produit</a>
-    </li>
-  </ul>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-light" style=" display:inline-block;">
+        <!-- Links -->
+        <ul class="navbar">
+            <li class="nav-item">
+                <a routerLink="employees" class="nav-link" routerLinkActive="active">Liste des employés</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="add" class="nav-link" routerLinkActive="active">Ajouter des employés</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="produits" class="nav-link" routerLinkActive="active">Liste de produits</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="addP" class="nav-link" routerLinkActive="active">Ajouter des produits</a>
+            </li>
+        </ul>
+    </nav>
 </div>
-
 
 <div class="container">
-  <br>
-  <h2 style="text-align: center;">{{title}}</h2>
-  <hr>  
-  <div class="card">
-    <div class="card-body">
-  <router-outlet></router-outlet>
+    <br>
+    <h2 style="text-align: center;">{{title1}}</h2>
+    <h3 style="text-align: center;">{{title2}}</h3>
+    <hr>
+    <div class="card">
+        <div class="card-body">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
-</div>
-

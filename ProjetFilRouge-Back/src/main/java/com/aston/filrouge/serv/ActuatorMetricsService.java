@@ -1,6 +1,7 @@
 package com.aston.filrouge.serv;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.HealthComponent;
 import org.springframework.boot.actuate.health.HealthEndpoint;
@@ -19,14 +20,16 @@ public class ActuatorMetricsService {
     private final HealthEndpoint healthEndpoint;
     private final InfoEndpoint infoEndpoint;
 
+    
     @Autowired
     public ActuatorMetricsService(MetricsEndpoint metricsEndpoint, HealthEndpoint healthEndpoint, InfoEndpoint infoEndpoint) {
         this.metricsEndpoint = metricsEndpoint;
         this.healthEndpoint = healthEndpoint;
         this.infoEndpoint = infoEndpoint;
     }
-
-    @Scheduled(initialDelay = 6000, fixedDelay = 60000)
+    
+    
+	@Scheduled(initialDelay = 6000, fixedDelay = 60000)
     public void fetchMetrics() {
         metricsEndpoint.listNames().getNames().forEach(n -> {
             log.info(n + " = " + metricsEndpoint.metric(n, Collections.emptyList()).getMeasurements());

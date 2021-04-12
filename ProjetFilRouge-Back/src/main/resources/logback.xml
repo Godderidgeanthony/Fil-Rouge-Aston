@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property scope="context" name="log.fileExtension" value="log"/>
-    <property scope="context" name="log.directory" value="/logs"/>
+    <property scope="context" name="log.directory" value="/home/ubuntu/logs"/>
     <property scope="context" name="log.fileName" value="FilRougeLog"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">

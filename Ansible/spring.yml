@@ -1,0 +1,5 @@
+- name: install spring
+  become:yes
+    sdk: name={{item}} state=latest
+      with_items:
+        - springboot

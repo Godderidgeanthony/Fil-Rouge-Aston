@@ -1,0 +1,13 @@
+- name: Install Back
+  become: yes
+    apt: name={{item}} state=latest
+      with_items:
+        - openjdk-8-jdk
+        - ca-certificates
+        - software-properties-common
+        - oracle-java8-set-default
+        - maven
+        - unzip zip
+        - update
+        - nginx-core
+        - docker-ce  

@@ -77,7 +77,7 @@ public class AzureApp
 	public static void main( String[] args )
 	{
 		String chaine="";
-		String fichier ="home/ubuntu/logs/FilRougeLog.2021-04-01.log";
+		String fichier ="/home/ubuntu/logs/test.log";
  
 		//lecture du fichier texte	
 		try{

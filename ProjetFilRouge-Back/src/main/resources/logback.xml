@@ -17,10 +17,10 @@
         </encoder>
     </appender>
     <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:5000</destination>
+        <destination>164.132.212.109:5000</destination>
         <!-- encoder is required -->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
-        <keepAliveDuration>5 minutes</keepAliveDuration>
+        <keepAliveDuration>10 minutes</keepAliveDuration>
     </appender>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

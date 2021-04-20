@@ -238,3 +238,11 @@ sudo docker system prune --all --force --volumes
 docker run --restart=always -p 8080:8080
     --name v2-mirror -v /var/lib/docker-registry:/var/lib/registry \
     --detach registry:2 serve /var/lib/registry/config.yml
+
+************************ Jenkins Installation ************************
+
+docker pull jenkins/jenkins
+
+docker run -p 18080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+
+mot de passe : 2495fe861c064c2faa1e8b05cd523e93

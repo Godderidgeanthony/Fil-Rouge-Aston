@@ -1,3 +1,4 @@
+---
     - name: Install add-apt-repostory
   become: yes
     apt: name=software-properties-common state=latest
@@ -15,5 +16,5 @@
           apt: name={{item}} state=latest
             with_items:
                         - oracle-java8-installer
-                              - ca-certificates
-                                    - oracle-java8-set-default
+                        - ca-certificates
+                        - oracle-java8-set-default

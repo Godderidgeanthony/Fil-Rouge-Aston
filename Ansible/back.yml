@@ -1,5 +1,6 @@
+---
 - name: Install Back
-  become: yes
+    become: yes
     apt: name={{item}} state=latest
       with_items:
         - openjdk-8-jdk

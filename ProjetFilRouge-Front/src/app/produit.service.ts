@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProduitService {
-  private baseUrl = 'http://164.132.212.109:8080/projetfilrouge/api/produits';
+  private baseUrl = 'http://170.75.170.145:8080/projetfilrouge/api/produits';
 
   constructor(private http: HttpClient) { }
   getProduit(id: number): Observable<any> {

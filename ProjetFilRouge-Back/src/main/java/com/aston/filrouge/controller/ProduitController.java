@@ -22,8 +22,8 @@ import com.aston.filrouge.dto.ProduitDto;
 import com.aston.filrouge.model.Produit;
 import com.aston.filrouge.repository.ProduitRepository;
 
-//@CrossOrigin(origins = "http://192.168.0.37:4200")
-@CrossOrigin(origins = "http://fil-rouge-1.xyz:4200")
+@CrossOrigin(origins = "http://170.75.170.145:4200")
+//@CrossOrigin(origins = "http://fil-rouge-1.xyz:4200")
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")

@@ -23,7 +23,7 @@ import com.aston.filrouge.dto.EmployeeDto;
 import com.aston.filrouge.model.Employee;
 import com.aston.filrouge.repository.EmployeeRepository;
 
-@CrossOrigin(origins = "http://170.75.170.145:4200")
+@CrossOrigin(origins = "http://170.75.170.247:4200")
 //@CrossOrigin(origins = "http://fil-rouge-1.xyz:4200")
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController

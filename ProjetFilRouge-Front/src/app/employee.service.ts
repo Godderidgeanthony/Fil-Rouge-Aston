@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class EmployeeService {
 
-  private baseUrl = 'http://170.75.170.247:8080/projetfilrouge/api/employees';
+  private baseUrl = 'http://172.81.181.47:8080/projetfilrouge/api/employees';
 
   constructor(private http: HttpClient) { }
 

@@ -17,7 +17,7 @@ sudo passwd root
 su root 
 
 #### On accorde les privilès root aux users ####
-
+1
 vi /etc/sudoers
 Ajouter la ligne suivante sous # User privilege specification
 hydcloud ALL=(ALL:ALL) ALL

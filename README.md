@@ -246,3 +246,226 @@ docker pull jenkins/jenkins
 docker run -p 18080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 
 mot de passe : 2495fe861c064c2faa1e8b05cd523e93
+
+************************ ELK Installation/Tests ************************
+
+#### Elasticsearch Installation ####
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+sudo apt-get install apt-transport-https
+
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+sudo apt-get update -y && sudo apt-get install elasticsearch
+
+#### Elasticsearch Lancement ####
+
+sudo systemctl start elasticsearch
+
+curl localhost:9200
+
+Résultat : 
+
+{
+  "name" : "aston-fil-rouge-cicd-n1",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "SI6HLQR1QzCQyQ3pPLmX9g",
+  "version" : {
+    "number" : "7.12.1",
+    "build_flavor" : "default",
+    "build_type" : "deb",
+    "build_hash" : "3186837139b9c6b6d23c3200870651f10d3343b7",
+    "build_date" : "2021-04-20T20:56:39.040728659Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.8.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+sudo systemctl enable elasticsearch
+
+#### Kibana ####
+
+#### Kibana Installation ####
+
+sudo apt-get install kibana
+
+Dans le fichier /etc/kibana/kibana.yml
+
+Décommenter la ligne :
+elasticsearch.hosts: ["http://localhost:9200"]
+
+#### Kibana Lancement ####
+
+sudo systemctl start kibana
+
+#### Logstash ####
+
+#### Logstash Installation ####
+
+sudo apt-get install logstash
+
+Dans le fichier /etc/logstash/logstash.yml
+
+#### Logstash Lancement ####
+
+sudo systemctl start logstash
+
+sudo systemctl enable logstash
+
+#### Ajouter les dépendances Java ####
+
+Éditer le fichier /home/ubuntu/Projet-Fil-Rouge/Fil-Rouge-Aston/ProjetFilRouge-Back/pom.xml
+
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+<dependency>
+   <groupId>net.logstash.logback</groupId>
+   <artifactId>logstash-logback-encoder</artifactId>
+   <version>6.3</version>
+</dependency>
+
+<dependency>
+   <groupId>org.projectlombok</groupId>
+   <artifactId>lombok</artifactId>
+   <optional>true</optional>
+</dependency>
+
+#### Configurer les logs ####
+
+Éditer les fichiers :
+/home/ubuntu/Projet-Fil-Rouge/Fil-Rouge-Aston/ProjetFilRouge-Back/target/classes/logback.xml
+/home/ubuntu/Projet-Fil-Rouge/Fil-Rouge-Aston/ProjetFilRouge-Back/src/main/resources/logback.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property scope="context" name="log.fileExtension" value="log"/>
+    <property scope="context" name="log.directory" value="/home/ubuntu/logs"/>
+    <property scope="context" name="log.fileName" value="filrouge-elk"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [${HOSTNAME}] [%thread] %level %logger{36}@%method:%line - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.directory}/${log.fileName}.%d{yyyy-MM-dd}.${log.fileExtension}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [${HOSTNAME}] [%thread] %level %logger{36}@%method:%line - %msg%n</pattern>
+        </encoder>
+        </appender>
+
+    <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>172.81.181.47:5000</destination>
+        <!-- encoder is required -->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        <keepAliveDuration>10 minutes</keepAliveDuration>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="STASH"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
+
+#### Logstash Configuration ####
+
+Créer et éditer le fichier /etc/logstash/conf.d/logstash-file.conf
+
+input {
+    file {
+        path => "/home/ubuntu/logs.log"
+        codec => "plain"
+        type => "logback"
+    }
+}
+
+filter {
+  if [message] =~ "\tat" {
+    grok {
+      match => ["message", "^(\tat)"]
+      add_tag => ["stacktrace"]
+    }
+  }
+
+  grok {
+    match => [ "message",
+               "(?m)\[%{TIMESTAMP_ISO8601:timestamp}\] \[%{HOSTNAME:host}\] \[%{DATA:thread}\] %{LOGLEVEL:logLevel} %{DATA:class}@%{DATA:method}:%{DATA:line} \- %{GREEDYDATA:msg}"
+             ]
+  }
+
+  date {
+    match => [ "timestamp" , "yyyy-MM-dd HH:mm:ss.SSS" ]
+  }
+  mutate {
+    remove_field => ["message"]
+  }
+}
+
+output {
+    stdout { codec => rubydebug }
+    elasticsearch {
+        hosts => ["localhost:9200"]
+        index => "filrouge-elk-file-%{+YYYY.MM.dd}"
+        #user => "elastic"
+        #password => "changeme"
+    }
+}
+
+Créer et éditer le fichier /etc/logstash/conf.d/logstash-tcp.conf
+
+input {
+    tcp {
+        port => "5000"
+        codec => json_lines
+    }
+}
+
+output {
+    stdout {}
+    elasticsearch {
+        hosts => ["http://localhost:9200"]
+        index => "filrouge-elk-tcp-%{+YYYY.MM.dd}"
+  }
+}
+
+In
+
+#### Logstash Injecter la configuration ####
+
+En super administrateur (sudo su)
+
+Dans la directory /usr/share/logstash/bin/
+
+Modifier la variable d'enrironnement jdk : export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+
+Injecter le code :
+
+./logstash -f /etc/logstash/conf.d/logstash-file.conf
+./logstash -f /etc/logstash/conf.d/logstash-tcp.conf
+
+Redémarrer la machine
+
+#### Interface Kibana ####
+
+Management => Stack Management => Data => Index Management => Ajouter l'index filrouge-elk-file-****.**.**
+
+Management => Stack Management => Kibana => Index Patterns => Create index pattern => Sélectionner l'index filrouge-elk-file-****.**.**
+
+Analytics => Discover => Ajouter les filtres 
+
+
+
+
+
+
